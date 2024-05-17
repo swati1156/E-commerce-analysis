@@ -1,6 +1,6 @@
 # E-commerce-analysis
 
-This project helps develop actionable data to optimize operations, enhance customer satisfaction, and boost sales performance.
+This project helps in providing actionable data to optimize operations, enhance customer satisfaction, and boost sales performance.
 
 - Customer Insights: Understanding customer base to tailor marketing strategies.
 - Product Analysis: Evaluating product performance to inform stock and sales strategies.
