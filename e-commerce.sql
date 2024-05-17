@@ -86,9 +86,10 @@ ORDER BY unique_customers DESC;
 
 WITH helper_table AS (
     SELECT 
-		DATE_FORMAT(order_date, '%Y-%m') AS Month,
-		SUM(total_amount) AS TotalSales
-    FROM Orders
+	DATE_FORMAT(order_date, '%Y-%m') AS Month,
+	SUM(total_amount) AS TotalSales
+    FROM 
+	Orders
     GROUP BY Month
 )
 
@@ -114,9 +115,10 @@ FROM helper_table;
 WITH helper_table AS
 (
     SELECT 
-		DATE_FORMAT(order_date,'%Y-%m') as Month,
-		Avg(total_amount) AS AvgOrderValue
-    FROM Orders
+	DATE_FORMAT(order_date,'%Y-%m') as Month,
+	Avg(total_amount) AS AvgOrderValue
+    FROM 
+	Orders
     GROUP BY Month
 )
 
@@ -153,7 +155,7 @@ set @total_count = (select count(distinct customer_id) from customers);
 WITH product_detail AS
 (
     SELECT 
-		products.product_id, 
+	products.product_id, 
         COUNT(distinct orders.customer_id) UniqueCustomerCount
     FROM products
     JOIN OrderDetails
@@ -163,9 +165,8 @@ WITH product_detail AS
     GROUP BY products.product_id
 ),
 helper_table as (
-  --  select product_detail.product_id,products.name as Name,UniqueCustomerCount
-    select 
-		pd.product_id,
+    SELECT 
+	pd.product_id,
         name,
         UniqueCustomerCount
     From products p
@@ -185,7 +186,7 @@ where UniqueCustomerCount/@total_count < 0.4;
 with helper_table as
 (
     select 
-		customer_id, 
+	customer_id, 
         min(order_date) firstpurchasedate
     from orders
     group by customer_id
