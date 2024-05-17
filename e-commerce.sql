@@ -3,10 +3,10 @@ USE e_commerce;
 
 
 -- analyses all the tables by describing their contents
-Desc Customers;
-Desc Products;
-Desc Orders;
-Desc OrderDetails;
+DESC Customers;
+DESC Products;
+DESC Orders;
+DESC OrderDetails;
 
 
 --------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ SELECT
     category, COUNT(DISTINCT customer_id) AS unique_customers
 FROM
     Products pt
-        JOIN
+	JOIN
     OrderDetails od ON pt.product_id = od.product_id
         JOIN
     Orders os ON od.order_id = os.order_id
@@ -150,31 +150,31 @@ LIMIT 5;
 -- List products purchased by less than 40% of the customer base, 
 -- indicating potential mismatches between inventory and customer interest.
 
-set @total_count = (select count(distinct customer_id) from customers);
+set @total_count = (SELECT COUNT(DISTINCT customer_id) FROM customers);
 -- Total number of unique customers
 WITH product_detail AS
 (
     SELECT 
 	products.product_id, 
-        COUNT(distinct orders.customer_id) UniqueCustomerCount
+        COUNT(DISTINCT orders.customer_id) UniqueCustomerCount
     FROM products
     JOIN OrderDetails
-        on products.product_id = OrderDetails.product_id
-            join orders
-                on OrderDetails.order_id = orders.order_id
+        ON products.product_id = OrderDetails.product_id
+            JOIN orders
+                ON OrderDetails.order_id = orders.order_id
     GROUP BY products.product_id
 ),
-helper_table as (
+helper_table AS (
     SELECT 
 	pd.product_id,
         name,
         UniqueCustomerCount
     From products p
-    JOIN product_detail pd on p.product_id = pd.product_id
+    JOIN product_detail pd ON p.product_id = pd.product_id
 )
 SELECT * 
 FROM helper_table
-where UniqueCustomerCount/@total_count < 0.4;
+WHERE UniqueCustomerCount/@total_count < 0.4;
 
 
 --------------------------------------------------------------------------------------------------
@@ -183,20 +183,20 @@ where UniqueCustomerCount/@total_count < 0.4;
 -- Evaluate the month-on-month growth rate in the customer base to 
 -- understand the effectiveness of marketing campaigns and market expansion efforts.
 
-with helper_table as
+WITH helper_table AS
 (
-    select 
+    SELECT 
 	customer_id, 
         min(order_date) firstpurchasedate
-    from orders
-    group by customer_id
+    FROM orders
+    GROUP BY customer_id
 )
-select 
+SELECT 
 	DATE_FORMAT(firstpurchasedate,'%Y-%m') firstpurchasemonth,
-	count(*) TotalNewCustomers
-from helper_table
-group by firstpurchasemonth
-order by firstpurchasemonth;
+	COUNT(*) TotalNewCustomers
+FROM helper_table
+GROUP BY firstpurchasemonth
+ORDER BY firstpurchasemonth;
 
 
 --------------------------------------------------------------------------------------------------
