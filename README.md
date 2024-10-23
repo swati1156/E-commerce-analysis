@@ -12,7 +12,7 @@ This project involves analyzing an e-commerce database using SQL. The goal is to
 
 ## Insights & Recommendations
 
-- **Implement targeted marketing campaigns** to address the decline in the customer base, specifically in underperforming areas like **February**.
+- **Implement targeted marketing campaigns** to address the decline in the customer base, specifically in underperforming months like **February**.
 - Restock for *September* and *December* in advance, and hire additional staff to **handle increased demand**.
 - **Improve the visibility** of underperforming products (those purchased by less than 40% of customers) to boost sales.
 - Focus marketing strategies on *Delhi, Chennai, and Jaipur* to tap into potential **high-performing regions**.
