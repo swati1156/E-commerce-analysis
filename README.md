@@ -1,7 +1,7 @@
 # E-Commerce Data Analysis Project
 
 ## Overview
-This project involves analyzing an e-commerce database using SQL. The goal is to derive actionable insights from customer, product, and order data. The analysis focuses on understanding customer distribution, product performance, and market trends, which can be used for targeted marketing, inventory management, and business strategy optimization.
+This project involves analyzing an e-commerce database using SQL. The goal is to derive actionable insights from customer, product, and order data for understanding customer distribution, product performance, and market trends, which can be used for targeted marketing, inventory management, and business strategy optimization.
 
 ## Project Objectives
 
